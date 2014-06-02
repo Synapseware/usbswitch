@@ -1,0 +1,29 @@
+Some comments about the hardware:
+
+(1) If you use this circuit to switch mains voltage, be CAREFUL! If the high
+voltage section is not properly shielded and insulated, you may damage the
+circuit, the computer connected to it or you may even endanger your life!
+
+(2) Switching inductive loads may cause electromagnetic interference (EMI).
+To protect the circuit from EMI, you may need the usual shielding and
+filtering.
+
+(3) The circuit does not include brownout detection. When the voltage drops
+slowly (which can happen with the 1000uF filter capacitor in the power
+supply), the CPU may execute random instructions and thus modify the EEPROM.
+You will notice that the EEPROM has been modified if the status of the
+switches is not preserved across power-down. In this case please add your
+favorite brownout protection. See e.g. Atmel's Application Note AN180. The
+ATtiny2313 device includes brownout detection on chip.
+
+(4) We recommend that you use the ATtiny2313 which is specified for the
+high clock rate. The AT90S2313-10 may cause considerable trouble with EMI.
+Remember that it runs at almost twice the specified speed! [You may consider
+running the AT90S2313-10 at 5V, but then the USB signals are outside the
+specified voltage range. However, implementations are required to survive
+this voltage.]
+
+(5) The CPU is supplied by both, the USB bus and a separate power supply.
+The USB supply ensures that the CPU is not damaged when connected without
+supply. It is not intended for operation. The separate supply ensures that
+the device works without a host.
